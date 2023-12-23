@@ -1,54 +1,39 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
 <head>
-    <title>Spring Security Example</title>
+    <style>
+        /* Стили для кнопки */
+        .button {
+            background-color: cadetblue;
+            color: lightsteelblue;
+            padding: 20px 30px;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Стили для контейнера с кнопкой */
+        .big-button {
+            width: 300px;
+            height: 140px;
+            background-color: cadetblue;
+            color: white;
+            font-size: 55px;
+            border: darkblue;
+            border-radius: 10px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
 </head>
 <body>
-<h1>Welcome to Index PAGE!</h1>
 
-
-
-
-<h1>Data Base Users</h1>
-<table border="1" style="width: 300px">
-    <thead>
-    <tr>
-        <th scope="col">id   </th>
-        <th scope="col">Имя пользователя</th>
-        <th scope="col">Возраст</th>
-        <th scope="col">Изменить</th>
-        <th scope="col">Удалить</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${ListOfUsers}">
-        <td th:text="${user.getId()}"></td>
-        <td th:text="${user.getName()}"></td>
-        <td th:text="${user.getAge()}"></td>
-        <td>
-            <form class="mb-2" th:action="@{/edit}" th:method="GET">
-                <input type="hidden" name="id" th:value="${user.getId()}">
-                <button class="btn btn-outline-warning bi-pencil-square" type="submit">Изменить
-                </button>
-            </form>
-        </td>
-        <td>
-            <form class="mb-2" th:action="@{/delete}" th:method="DELETE">
-                <input type="hidden" name="id" th:value="${user.getId()}">
-                <button class="btn btn-outline-danger bi-trash3" type="submit">Удалить
-                </button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<br>
-<form th:action="@{/new}" th:method="GET">
-    <button type="submit">Добавить пользователя</button>
-</form>
-
-
-
+<div class="container">
+    <button class="big-button" onclick="window.location.href='/login'">Войти</button>
+</div>
 
 </body>
 </html>
