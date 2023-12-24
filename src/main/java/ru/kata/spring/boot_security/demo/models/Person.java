@@ -16,8 +16,8 @@ public class Person {
 
     @NotEmpty(message = "имя не должно быть пустым")
     @Size(min = 2, max = 60, message = "имя должно быть от 2 до 60 символов")
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "user_name")
+    private String username;
 
     @NotEmpty(message = "фамилия не может быть пустой")
     @Size(min = 2, max = 60, message = "фамилия должна быть от 2 до 60 символов")
@@ -37,8 +37,8 @@ public class Person {
     @Column(name = "password")
     private String password;
 
-    public Person(String firstName, String lastName, int age, String email) {
-        this.firstName = firstName;
+    public Person(String username, String lastName, int age, String email) {
+        this.username = username;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
@@ -55,12 +55,12 @@ public class Person {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getLastName() {
@@ -99,7 +99,7 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
+                ", username='" + username + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
@@ -107,5 +107,5 @@ public class Person {
                 '}';
     }
 
-    
+
 }

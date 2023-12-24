@@ -1,39 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-        /* Стили для кнопки */
-        .button {
-            background-color: cadetblue;
-            color: lightsteelblue;
-            padding: 20px 30px;
-            font-size: 24px;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Стили для контейнера с кнопкой */
-        .big-button {
-            width: 300px;
-            height: 140px;
-            background-color: cadetblue;
-            color: white;
-            font-size: 55px;
-            border: darkblue;
-            border-radius: 10px;
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>DB Users</title>
 </head>
 <body>
-
-<div class="container">
-    <button class="big-button" onclick="window.location.href='/login'">Войти</button>
-</div>
-
+<h3>Твои данные</h3>
+<table border="1" style="width: 300px">
+    <thead>
+    <tr>
+        <th scope="col">id   </th>
+        <th scope="col">Имя </th>
+        <th scope="col">фамилия</th>
+        <th scope="col">возраст</th>
+        <th scope="col">почта</th>
+        <th scope="col">пароль</th>
+    </tr>
+    </thead>
+<!--    <tbody>-->
+<!--    <tr th:each="person : ${person}">-->
+<!--        <td th:text="${person.getId()}"></td>-->
+<!--        <td th:text="${person.getUsername()}"></td>-->
+<!--        <td th:text="${person.getLastName()}"></td>-->
+<!--        <td th:text="${user.getAge()}"></td>-->
+<!--        <td th:text="${user.getEmail()}"></td>-->
+<!--        <td th:text="${user.getPassword()}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+</table>
 </body>
 </html>
