@@ -2,12 +2,18 @@ package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.kata.spring.boot_security.demo.models.Person;
 import ru.kata.spring.boot_security.demo.security.PersonDetails;
 import ru.kata.spring.boot_security.demo.services.PersonDetailsService;
+
+import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 public class HelloController {
@@ -19,8 +25,10 @@ public class HelloController {
     }
 
     @GetMapping("/hello")
-    public String sayHello(@RequestParam("id") int id, Model model) {
-        model.addAttribute("person", personDetailsService.getPersonById(id));
+    public String sayHello(Model model, Principal principal) {
+        Person person = personDetailsService.getPersonByName(principal.getName()).orElse(null);
+
+        model.addAttribute("person", person);
         return "/hello/index";
     }
 

@@ -34,7 +34,7 @@ public class PersonDetailsService implements UserDetailsService {
         return peopleRepository.findAll();
     }
 
-    public Optional<Person> getPersonById(int id) {
-        return peopleRepository.findById(id);
+    public Optional<Person> getPersonByName(String username) {
+        return peopleRepository.findByUsername(username);
     }
 }

@@ -34,26 +34,23 @@
         <th scope="col">фамилия</th>
         <th scope="col">возраст</th>
         <th scope="col">почта</th>
+        <th scope="col">роль</th>
         <th scope="col">зашифрованный пароль</th>
     </tr>
     </thead>
-
-    <form th:method="GET" th:action="@{/hello}" th:object="${person}">
-        <input type="hidden" name="id" th:value="${person.getId()}">
-        <br>
     <tbody>
 
-    <tr th:each="user : ${person}">
-        <td th:text="${user.getId()}"></td>
-        <td th:text="${user.getUsername()}"></td>
-        <td th:text="${user.getLastName()}"></td>
-        <td th:text="${user.getAge()}"></td>
-        <td th:text="${user.getEmail()}"></td>
-        <td th:text="${user.getRole()}"></td>
-        <td th:text="${user.getPassword()}"></td>
+
+    <tr th:object="${person}">
+        <td th:text="${person.getId()}"></td>
+        <td th:text="${person.getUsername()}"></td>
+        <td th:text="${person.getLastName()}"></td>
+        <td th:text="${person.getAge()}"></td>
+        <td th:text="${person.getEmail()}"></td>
+        <td th:text="${person.getRole()}"></td>
+        <td th:text="${person.getPassword()}"></td>
     </tr>
     </tbody>
-    </form>
 </table>
 </body>
 </html>
