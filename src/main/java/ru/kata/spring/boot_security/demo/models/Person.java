@@ -36,6 +36,8 @@ public class Person {
     @Size(min = 4, message = "пароль должен быть от 4 символов")
     @Column(name = "password")
     private String password;
+    @Column(name = "role")
+    private String role;
 
     public Person(String username, String lastName, int age, String email) {
         this.username = username;
@@ -93,6 +95,14 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

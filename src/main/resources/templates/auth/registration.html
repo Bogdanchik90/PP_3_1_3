@@ -23,6 +23,14 @@
     <input type="text" th:field="*{email}" id="email">
     <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
     <br><br>
+    <label for="email">Введите роль: </label>
+    <label>
+        <input type="checkbox" name="role" value="admin"> Администратор
+    </label>
+    <label>
+        <input type="checkbox" name="role" value="user"> Пользователь
+    </label>
+    <br><br>
     <label for="password">Введите пароль: </label>
     <input type="password" th:field="*{password}" id="password">
     <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>

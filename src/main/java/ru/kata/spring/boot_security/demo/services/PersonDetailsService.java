@@ -9,6 +9,7 @@ import ru.kata.spring.boot_security.demo.models.Person;
 import ru.kata.spring.boot_security.demo.repositiries.PeopleRepository;
 import ru.kata.spring.boot_security.demo.security.PersonDetails;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,5 +29,12 @@ public class PersonDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Пользователь не найден");
 
         return new PersonDetails(person.get());
+    }
+    public List<Person> getAllPeople() {
+        return peopleRepository.findAll();
+    }
+
+    public Optional<Person> getPersonById(int id) {
+        return peopleRepository.findById(id);
     }
 }
