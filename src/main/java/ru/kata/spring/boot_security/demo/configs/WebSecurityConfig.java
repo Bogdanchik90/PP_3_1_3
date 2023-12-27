@@ -19,9 +19,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        this.successUserHandler = successUserHandler;
 //    }
     private final PersonDetailsService personDetailsService;
+    private final PasswordEncoder passwordEncoder;
     @Autowired
-    public WebSecurityConfig(PersonDetailsService personDetailsService) {
+    public WebSecurityConfig(PersonDetailsService personDetailsService, PasswordEncoder passwordEncoder) {
         this.personDetailsService = personDetailsService;
+        this.passwordEncoder = passwordEncoder;
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception{

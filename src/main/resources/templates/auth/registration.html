@@ -25,10 +25,10 @@
     <br><br>
     <label for="email">Введите роль: </label>
     <label>
-        <input type="checkbox" name="role" value="admin"> Администратор
+        <input type="checkbox" th:field="*{role}" value="ROLE_ADMIN"> Администратор
     </label>
     <label>
-        <input type="checkbox" name="role" value="user"> Пользователь
+        <input type="checkbox" th:field="*{role}" value="ROLE_USER"> Пользователь
     </label>
     <br><br>
     <label for="password">Введите пароль: </label>

@@ -5,13 +5,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.Person;
 import ru.kata.spring.boot_security.demo.security.PersonDetails;
 import ru.kata.spring.boot_security.demo.services.PersonDetailsService;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -43,5 +43,27 @@ public class HelloController {
     public String adminPage(Model model) {
         model.addAttribute("person",personDetailsService.getAllPeople());
         return "/hello/admin";
+    }
+
+    @GetMapping("/edit")
+    public String editUser(@RequestParam("id") int id, Model model) {
+        model.addAttribute("editUser", personDetailsService.getById(id));
+        return "/admin/edit";
+    }
+
+    @PatchMapping("/edit")
+    public String update(@RequestParam("id") int id, @ModelAttribute("editUser") @Valid Person updatePerson,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "/edit";
+
+        personDetailsService.updateUserById(id,updatePerson);
+        return "redirect:/admin";
+    }
+
+    @DeleteMapping("/delete")
+    public String delete(@RequestParam("id") int id) {
+        personDetailsService.deleteById(id);
+        return "redirect:/admin";
     }
 }

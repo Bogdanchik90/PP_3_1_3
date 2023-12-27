@@ -9,8 +9,8 @@ import ru.kata.spring.boot_security.demo.repositiries.PeopleRepository;
 
 @Service
 public class RegistrationService {
-    private final PeopleRepository peopleRepository;
-    private final PasswordEncoder passwordEncoder;
+    private PeopleRepository peopleRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public RegistrationService(PeopleRepository peopleRepository, PasswordEncoder passwordEncoder) {
@@ -20,7 +20,6 @@ public class RegistrationService {
     @Transactional
     public void register(Person person) {
         person.setPassword(passwordEncoder.encode(person.getPassword()));
-        person.setRole("ROLE_USER");
         peopleRepository.save(person);
     }
 }
