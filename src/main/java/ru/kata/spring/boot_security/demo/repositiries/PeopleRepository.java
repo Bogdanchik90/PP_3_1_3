@@ -19,4 +19,6 @@ public interface PeopleRepository extends JpaRepository<Person, Integer> {
 
     @Override
     List<Person> findAll();
+
+
 }

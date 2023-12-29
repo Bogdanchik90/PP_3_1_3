@@ -1,17 +1,24 @@
 package ru.kata.spring.boot_security.demo.models;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "Person")
 public class Person {
     @Id
-    @Column(name = "id")
+    @Column(name = "person_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -37,14 +44,20 @@ public class Person {
     @Size(min = 4, message = "пароль должен быть от 4 символов")
     @Column(name = "password")
     private String password;
-    @Column(name = "role")
-    private String role;
+    @ManyToMany
+    @JoinTable(
+            name = "person_roles",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 
-    public Person(String username, String lastName, int age, String email) {
+    public Person(String username, String lastName, int age, String email, String password, List<Role> roles) {
         this.username = username;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
+        this.password = password;
+        this.roles = roles;
     }
 
     public Person() {
@@ -98,12 +111,13 @@ public class Person {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return (List<Role>) roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(Role roles) {
+        this.roles.add(roles);
+        roles.getPersons().add(this);
     }
 
     @Override
@@ -115,8 +129,7 @@ public class Person {
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
-
-
 }

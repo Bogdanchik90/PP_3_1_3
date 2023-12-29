@@ -19,15 +19,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        this.successUserHandler = successUserHandler;
 //    }
     private final PersonDetailsService personDetailsService;
-    private final PasswordEncoder passwordEncoder;
     @Autowired
-    public WebSecurityConfig(PersonDetailsService personDetailsService, PasswordEncoder passwordEncoder) {
+    public WebSecurityConfig(PersonDetailsService personDetailsService) {
         this.personDetailsService = personDetailsService;
-        this.passwordEncoder = passwordEncoder;
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
+                .antMatchers("style.css").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/auth/login", "/auth/registration","/error").permitAll()
                 .anyRequest().hasAnyRole("USER", "ADMIN")
@@ -44,10 +44,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(personDetailsService)
-                .passwordEncoder(getPasswordEncoder());
+                .passwordEncoder(passwordEncoder());
     }
     @Bean
-    public PasswordEncoder getPasswordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
